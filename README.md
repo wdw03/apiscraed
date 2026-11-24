@@ -112,6 +112,21 @@ The CloudFront scoreboard domain validates CORS. If an external `Origin: https:/
 | `/embed/{gameId}?theme=dark` | GET | `theme=dark\|light` | Embeddable responsive HTML iframe scoreboard widget |
 | `/ws` | WSS | WebSocket | Real-time score websocket stream (`subscribe_score`) |
 
+### 🚀 Production Vercel Serverless Endpoints (`https://apiscraed.vercel.app`):
+
+All 8 cricket endpoints are deployed as dedicated standalone routes with auto-resolution (accepting either numeric `game_id` or provider `event_id`):
+
+| # | Dedicated Endpoint | Shortcut Alias | Description | Auth |
+|---|---|---|---|:---:|
+| 1 | `GET /api/score/bootstrap/{match_id}` | `GET /api/live/{match_id}` | Live score overview, toss, runs, wickets, overs | Free / No Auth |
+| 2 | `GET /api/score/scorecard/{match_id}` | `GET /api/scorecard/{match_id}` | Full innings batting & bowling scorecards | Free / No Auth |
+| 3 | `GET /api/score/commentary/{match_id}` | `GET /api/commentary/{match_id}` | Live ball-by-ball text commentary stream | Free / No Auth |
+| 4 | `GET /api/score/partnerships/{match_id}` | `GET /api/partnerships/{match_id}` | Batting partnerships breakdown per wicket | Free / No Auth |
+| 5 | `GET /api/score/lineup/{match_id}` | `GET /api/lineup/{match_id}` | Playing XI, captain, keeper & bench squads | Free / No Auth |
+| 6 | `GET /api/score/overs/{match_id}` | `GET /api/overs/{match_id}` | Ball-by-ball delivery log & bowler figures | Free / No Auth |
+| 7 | `GET /api/score/charts/{match_id}` | `GET /api/charts/{match_id}` | Worm chart coordinates & run rate vectors | Free / No Auth |
+| 8 | `GET /api/score/embed/{match_id}` | `GET /api/embed/{match_id}` | Responsive HTML iframe widget URL | Free / No Auth |
+
 ### Python Score Example:
 ```python
 from d247_score import ScoreClient

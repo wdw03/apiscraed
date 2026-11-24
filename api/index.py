@@ -170,105 +170,190 @@ HTML_PORTAL = """<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- Category 1: Cricket Live Score -->
+    <!-- Category 1: Cricket Live Score (8 Dedicated Endpoints) -->
     <div class="mb-12">
-      <div class="flex items-center gap-2 mb-4">
-        <span class="text-xl">🏏</span>
-        <h3 class="text-xl font-bold text-emerald-400">Cricket Live Score & Commentary APIs</h3>
-        <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">No Auth / Free</span>
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🏏</span>
+          <h3 class="text-xl font-bold text-emerald-400">Cricket Live Score & Match Feed APIs</h3>
+          <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold border border-emerald-500/30">8 Dedicated APIs • Zero Auth</span>
+        </div>
+        <span class="text-xs text-gray-400 font-mono">Live Match: SA vs BAN (ID: 609763268)</span>
       </div>
 
       <div class="grid gap-4">
-        <!-- Endpoint Card 1 -->
-        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition">
+        <!-- 1. Score Overview -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
-              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/bootstrap/{game_id}</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/bootstrap/{match_id}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/live/{match_id}</span>
             </div>
-            <div class="flex items-center gap-2">
-              <button onclick="testApi('/api/score/bootstrap/609763268')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
-                <i class="fa-solid fa-play text-[10px]"></i> Run Live (SA vs BAN)
-              </button>
-            </div>
-          </div>
-          <p class="text-sm text-gray-400 mt-2">
-            Fetches high-level match state, toss decision, current innings runs, wickets, overs bowled, active batsman on strike, and bowler.
-          </p>
-          <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono text-gray-400">
-            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">Accept: application/json</code></div>
-            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
-            <div><span class="text-gray-500">Params:</span> <code class="text-gray-300">game_id (int)</code></div>
-          </div>
-        </div>
-
-        <!-- Endpoint Card 2 -->
-        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition">
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
-              <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
-              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/overs/{event_id}?innings=1&limit=5</span>
-            </div>
-            <button onclick="testApi('/api/score/overs/609763268?innings=1&limit=5')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
-              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Ball-by-Ball)
+            <button onclick="testApi('/api/score/bootstrap/609763268')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Score Overview)
             </button>
           </div>
           <p class="text-sm text-gray-400 mt-2">
-            Returns delivery-by-delivery ball breakdown for each over (dots, 1s, 4s, 6s, wickets, bowler figures, batsman runs).
+            <strong>Live Match Overview</strong>: Match status (live/finished), Toss winner & decision, Total Runs, Wickets, Overs, Run Rate, Striker, Non-Striker, and Current Bowler.
           </p>
-          <div class="mt-3 grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs font-mono text-gray-400">
-            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">None required</code></div>
-            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
-            <div><span class="text-gray-500">Query:</span> <code class="text-gray-300">innings=1, limit=5</code></div>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">Accept: application/json</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Free / Public)</span></div>
+            <div><span class="text-gray-500">Param:</span> <code class="text-emerald-300">match_id (int / string)</code></div>
           </div>
         </div>
 
-        <!-- Endpoint Card 3 -->
-        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition">
+        <!-- 2. Full Scoreboard / Scorecard -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
-              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/scorecard/{event_id}</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/scorecard/{match_id}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/scorecard/{match_id}</span>
             </div>
-            <button onclick="testApi('/api/score/scorecard/609763268')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
+            <button onclick="testApi('/api/score/scorecard/609763268')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
               <i class="fa-solid fa-play text-[10px]"></i> Run Live (Full Scorecard)
             </button>
           </div>
           <p class="text-sm text-gray-400 mt-2">
-            Full official innings scorecard: all batsmen (runs, balls, 4s, 6s, strike rate, dismissal mode) and bowlers (overs, maidens, runs, wickets, economy).
+            <strong>Official Scoreboard & Statistics</strong>: All innings batting figures (Runs, Balls, 4s, 6s, Strike Rate, Dismissal/Wicket mode) and bowling figures (Overs, Maidens, Runs conceded, Wickets, Economy).
           </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">Accept: application/json</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
+            <div><span class="text-gray-500">Param:</span> <code class="text-emerald-300">match_id</code></div>
+          </div>
         </div>
 
-        <!-- Endpoint Card 4 -->
-        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition">
+        <!-- 3. Commentary -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
-              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/lineup/{event_id}</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/commentary/{match_id}?limit=10</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/commentary/{match_id}</span>
             </div>
-            <button onclick="testApi('/api/score/lineup/609763268')" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
-              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Playing XI)
+            <button onclick="testApi('/api/score/commentary/609763268?limit=10')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Commentary)
             </button>
           </div>
           <p class="text-sm text-gray-400 mt-2">
-            Playing XI lineup for both teams, captain indicators, wicket-keeper roles, and bench substitute players.
+            <strong>Ball-by-Ball Text Commentary</strong>: Play-by-play narrative descriptions for every single ball delivered, boundaries, milestone highlights, and wicket dismissals.
           </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">None required</code></div>
+            <div><span class="text-gray-500">Query:</span> <code class="text-emerald-300">limit=10 (optional, default 50)</code></div>
+          </div>
         </div>
 
-        <!-- Endpoint Card 5 -->
-        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/30 transition">
+        <!-- 4. Partnerships -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
           <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
               <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
-              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/embed/{game_id}</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/partnerships/{match_id}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/partnerships/{match_id}</span>
             </div>
-            <a href="/api/score/embed/609763268?redirect=true" target="_blank" class="px-3 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition flex items-center gap-1.5">
-              <i class="fa-solid fa-up-right-from-square text-[10px]"></i> Open Scoreboard Widget
-            </a>
+            <button onclick="testApi('/api/score/partnerships/609763268')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Partnerships)
+            </button>
           </div>
           <p class="text-sm text-gray-400 mt-2">
-            Returns direct responsive HTML iframe widget code and URL to embed live scoreboard inside any React, WordPress, or mobile app.
+            <strong>Batting Partnerships</strong>: Wicket-by-wicket partnership breakdown, total partnership runs, balls faced, and individual batter run share for every stand.
           </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">None required</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
+          </div>
+        </div>
+
+        <!-- 5. Lineup -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/lineup/{match_id}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/lineup/{match_id}</span>
+            </div>
+            <button onclick="testApi('/api/score/lineup/609763268')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Playing XI & Squad)
+            </button>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">
+            <strong>Playing XI & Squads</strong>: 11 starting players for each team, Captain (`isCaptain: true`), Wicket-Keeper (`isKeeper: true`), and full bench substitute players.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">None required</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
+          </div>
+        </div>
+
+        <!-- 6. Overs -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/overs/{match_id}?innings=1&limit=5</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/overs/{match_id}</span>
+            </div>
+            <button onclick="testApi('/api/score/overs/609763268?innings=1&limit=5')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Overs Log)
+            </button>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">
+            <strong>Ball-by-Ball Delivery Log</strong>: Complete sequence of deliveries for each over (dots, 1s, 4s, 6s, wickets, wides, no-balls) alongside bowler figures.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Query:</span> <code class="text-emerald-300">innings=1, limit=5</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
+          </div>
+        </div>
+
+        <!-- 7. Charts -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/charts/{match_id}</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/charts/{match_id}</span>
+            </div>
+            <button onclick="testApi('/api/score/charts/609763268')" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold transition flex items-center gap-1.5 self-start lg:self-auto shadow-md shadow-emerald-600/20">
+              <i class="fa-solid fa-play text-[10px]"></i> Run Live (Worm & Charts)
+            </button>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">
+            <strong>Worm Graph & Run Rate Analytics</strong>: Over-by-over progression coordinates, cumulative scores, and required run rate curves for rendering frontend charts.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Headers:</span> <code class="text-gray-300">None required</code></div>
+            <div><span class="text-gray-500">Cookies:</span> <span class="text-emerald-400 font-semibold">None (100% Public)</span></div>
+          </div>
+        </div>
+
+        <!-- 8. Embed Widget -->
+        <div class="glass-card rounded-2xl p-5 hover:border-emerald-500/40 transition">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3">
+            <div class="flex items-center gap-3 flex-wrap">
+              <span class="px-2.5 py-1 rounded text-xs font-bold badge-get">GET</span>
+              <span class="font-mono text-sm sm:text-base text-gray-200 font-semibold">/api/score/embed/{match_id}?theme=dark</span>
+              <span class="text-xs px-2 py-0.5 rounded bg-gray-800 text-gray-400 font-mono">Shortcut: /api/embed/{match_id}</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="testApi('/api/score/embed/609763268')" class="px-3 py-1.5 rounded-lg bg-gray-800 hover:bg-gray-700 text-gray-300 text-xs font-semibold transition flex items-center gap-1.5 border border-gray-700">
+                <i class="fa-solid fa-code text-[10px]"></i> Get Embed JSON
+              </button>
+              <a href="/api/score/embed/609763268?redirect=true" target="_blank" class="px-3.5 py-1.5 rounded-lg bg-teal-600 hover:bg-teal-500 text-white text-xs font-semibold transition flex items-center gap-1.5 shadow-md shadow-teal-600/20">
+                <i class="fa-solid fa-up-right-from-square text-[10px]"></i> Open Scoreboard Widget
+              </a>
+            </div>
+          </div>
+          <p class="text-sm text-gray-400 mt-2">
+            <strong>Responsive HTML Iframe Widget</strong>: Direct embeddable widget URL and iframe tag for instant embedding into any React, Vue, WordPress, or mobile web app.
+          </p>
+          <div class="mt-3 flex flex-wrap gap-4 text-xs font-mono text-gray-400">
+            <div><span class="text-gray-500">Query:</span> <code class="text-emerald-300">theme=dark|light, redirect=true|false</code></div>
+          </div>
         </div>
       </div>
     </div>
@@ -545,13 +630,14 @@ def root(request: Request):
                 "sports_tree": "/api/tree",
                 "realtime_odds": "/api/odds/{game_id}",
                 "match_details": "/api/details/{game_id}",
-                "score_bootstrap": "/api/score/bootstrap/{game_id}",
-                "score_scorecard": "/api/score/scorecard/{event_id}",
-                "score_overs": "/api/score/overs/{event_id}?innings=1&limit=50",
-                "score_commentary": "/api/score/commentary/{event_id}",
-                "score_lineup": "/api/score/lineup/{event_id}",
-                "score_charts": "/api/score/charts/{event_id}",
-                "score_embed": "/api/score/embed/{game_id}",
+                "1_score_overview": "/api/score/bootstrap/{match_id} [alias: /api/live/{match_id}]",
+                "2_scorecard": "/api/score/scorecard/{match_id} [alias: /api/scorecard/{match_id}]",
+                "3_commentary": "/api/score/commentary/{match_id} [alias: /api/commentary/{match_id}]",
+                "4_partnerships": "/api/score/partnerships/{match_id} [alias: /api/partnerships/{match_id}]",
+                "5_lineup": "/api/score/lineup/{match_id} [alias: /api/lineup/{match_id}]",
+                "6_overs": "/api/score/overs/{match_id}?innings=1&limit=50 [alias: /api/overs/{match_id}]",
+                "7_charts": "/api/score/charts/{match_id} [alias: /api/charts/{match_id}]",
+                "8_embed_widget": "/api/score/embed/{match_id} [alias: /api/embed/{match_id}]",
                 "bet_payload_builder": "POST /api/bet/payload"
             }
         })
@@ -675,18 +761,22 @@ def get_game_odds(
 
 
 # --------------------------------------------------------------------------
-# Cricket Live Score Endpoints (CloudFront CDN)
+# Cricket Live Score Endpoints (8 Dedicated Endpoints & Public Feeds)
 # --------------------------------------------------------------------------
 
-@app.get("/api/score/bootstrap/{game_id}", tags=["Cricket Live Score"])
-def get_score_bootstrap(game_id: int):
+# 1. Live Match Score Overview
+@app.get("/api/score/bootstrap/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/score/live/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/live/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_score_bootstrap(match_id: str):
     """
-    Fetches high-level live cricket score summary:
-    Toss, match state, current runs/wickets/overs, active striker, non-striker, bowler, and providerEventId.
-    No login required.
+    1. Score API (Live Match Overview)
+    Fetches real-time match state, toss, current runs/wickets/overs, active striker, non-striker, bowler, and run rate.
+    Accepts numerical game_id (e.g. 609763268) or provider event ID.
+    No login or cookies required.
     """
     try:
-        res = score_client.get_bootstrap(game_id)
+        res = score_client.get_bootstrap(match_id)
         if not res.get("success"):
             return JSONResponse(status_code=404, content=res)
         return res
@@ -694,107 +784,134 @@ def get_score_bootstrap(game_id: int):
         raise HTTPException(status_code=500, detail=f"Failed to fetch score bootstrap: {str(e)}")
 
 
-@app.get("/api/score/scorecard/{event_id}", tags=["Cricket Live Score"])
-def get_scorecard(event_id: str):
+# 2. Scoreboard / Full Scorecard
+@app.get("/api/score/scorecard/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/scorecard/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_scorecard(match_id: str):
     """
-    Fetches complete scorecard including all innings, batting stats, bowling figures, and wickets.
-    Accepts either numerical `game_id` (e.g. 609763268) or provider ID (e.g. provider-3:...).
-    No login required.
+    2. Scoreboard API (Full Scorecard)
+    Fetches complete official scorecard with all innings, batting stats (runs, balls, 4s, 6s, SR),
+    bowling figures (overs, maidens, runs, wickets, economy), and dismissals.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
     """
     try:
-        res = score_client.get_scorecard(event_id)
+        res = score_client.get_scorecard(match_id)
         return res
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch scorecard: {str(e)}")
 
 
-@app.get("/api/score/overs/{event_id}", tags=["Cricket Live Score"])
-def get_overs(
-    event_id: str,
-    innings: int = Query(1, description="Inning number (1 or 2)"),
-    limit: int = Query(50, description="Maximum overs to return")
-):
-    """
-    Fetches ball-by-ball commentary for each completed and in-progress over.
-    Every single delivery display (dot, 1, 2, 4, 6, W, wide, no-ball) is included.
-    No login required.
-    """
-    try:
-        res = score_client.get_overs(event_id, innings_number=innings, limit=limit)
-        return res
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch overs: {str(e)}")
-
-
-@app.get("/api/score/commentary/{event_id}", tags=["Cricket Live Score"])
+# 3. Ball-by-Ball Text Commentary Stream
+@app.get("/api/score/commentary/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/commentary/{match_id}", tags=["Cricket Live Score - Dedicated"])
 def get_commentary(
-    event_id: str,
-    limit: int = Query(50, description="Maximum commentary entries")
+    match_id: str,
+    limit: int = Query(50, description="Maximum commentary entries to return")
 ):
     """
-    Fetches textual play-by-play commentary stream.
-    No login required.
+    3. Commentary API (Ball-by-Ball Text Stream)
+    Fetches live textual play-by-play commentary stream for every delivery.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
     """
     try:
-        res = score_client.get_commentary(event_id, limit=limit)
+        res = score_client.get_commentary(match_id, limit=limit)
         return res
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch commentary: {str(e)}")
 
 
-@app.get("/api/score/lineup/{event_id}", tags=["Cricket Live Score"])
-def get_lineup(event_id: str):
+# 4. Batting Partnerships Breakdown
+@app.get("/api/score/partnerships/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/partnerships/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_partnerships(match_id: str):
     """
-    Fetches playing XI, captain, wicket-keeper, and bench players for both teams.
-    No login required.
-    """
-    try:
-        res = score_client.get_lineup(event_id)
-        return res
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to fetch lineup: {str(e)}")
-
-
-@app.get("/api/score/partnerships/{event_id}", tags=["Cricket Live Score"])
-def get_partnerships(event_id: str):
-    """
-    Fetches batting partnerships per wicket.
-    No login required.
+    4. Partnership API (Batting Partnerships)
+    Fetches wicket-by-wicket partnership breakdown, batter run contributions, and balls faced.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
     """
     try:
-        res = score_client.get_partnerships(event_id)
+        res = score_client.get_partnerships(match_id)
         return res
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch partnerships: {str(e)}")
 
 
-@app.get("/api/score/charts/{event_id}", tags=["Cricket Live Score"])
-def get_charts(event_id: str):
+# 5. Playing XI & Squad Lineup
+@app.get("/api/score/lineup/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/lineup/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_lineup(match_id: str):
     """
-    Fetches Worm chart and run-rate progression data coordinates.
-    No login required.
+    5. Lineup API (Playing XI & Squad)
+    Fetches playing XI, captain indicator, wicket-keeper roles, and bench substitute players for both teams.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
     """
     try:
-        res = score_client.get_charts(event_id)
+        res = score_client.get_lineup(match_id)
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch lineup: {str(e)}")
+
+
+# 6. Ball-by-Ball Overs Log
+@app.get("/api/score/overs/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/overs/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_overs(
+    match_id: str,
+    innings: int = Query(1, description="Inning number (1 or 2)"),
+    limit: int = Query(50, description="Maximum overs to return")
+):
+    """
+    6. Overs API (Ball-by-Ball Deliveries Log)
+    Fetches ball-by-ball delivery log (dot, 1, 2, 4, 6, W, wide, no-ball) and bowler figures per over.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
+    """
+    try:
+        res = score_client.get_overs(match_id, innings_number=innings, limit=limit)
+        return res
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch overs: {str(e)}")
+
+
+# 7. Worm Graph & Charts
+@app.get("/api/score/charts/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/charts/{match_id}", tags=["Cricket Live Score - Dedicated"])
+def get_charts(match_id: str):
+    """
+    7. Charts API (Worm Graph & Run Rate Coordinates)
+    Fetches Worm chart data, cumulative runs per over, and run-rate progression vectors.
+    Accepts numerical game_id or provider event ID.
+    No login or cookies required.
+    """
+    try:
+        res = score_client.get_charts(match_id)
         return res
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch charts: {str(e)}")
 
 
-@app.get("/api/score/embed/{game_id}", tags=["Cricket Live Score"])
+# 8. Responsive Scoreboard Embed Widget
+@app.get("/api/score/embed/{match_id}", tags=["Cricket Live Score - Dedicated"])
+@app.get("/api/embed/{match_id}", tags=["Cricket Live Score - Dedicated"])
 def get_embed(
-    game_id: int,
+    match_id: str,
     theme: str = Query("dark", description="'dark' or 'light'"),
     redirect: bool = Query(False, description="Whether to redirect directly to embed HTML")
 ):
     """
-    Returns direct iframe widget URL or redirects to responsive HTML scoreboard embed.
+    8. Embed Widget API (Responsive Scoreboard Widget)
+    Returns direct iframe widget HTML and URL to embed live scoreboard inside any website or mobile app.
+    Accepts numerical game_id or provider event ID.
     """
-    url = score_client.get_embed_url(game_id, theme=theme)
+    url = score_client.get_embed_url(match_id, theme=theme)
     if redirect:
         return RedirectResponse(url=url)
     return {
-        "game_id": game_id,
+        "game_id": match_id,
         "theme": theme,
         "embed_url": url,
         "iframe_code": f'<iframe src="{url}" width="100%" height="450" frameborder="0"></iframe>'

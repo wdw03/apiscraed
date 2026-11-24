@@ -10,3 +10,5 @@ venv/
 .system_generated/
 scratch/
 ds
+live_test_results.json
+test_headers_local.py
