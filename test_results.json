@@ -1,0 +1,137 @@
+{
+  "timestamp": "2026-11-24 11:51:43",
+  "total_tests": 16,
+  "passed": 16,
+  "failed": 0,
+  "success_rate": "100.0%",
+  "results": [
+    {
+      "name": "CryptoJS AES Round-Trip",
+      "category": "Cryptography",
+      "passed": true,
+      "duration_ms": 30.57,
+      "details": "Encrypted format starts with 'U2FsdGVkX1' (Salted__), Decrypted matches exactly",
+      "data_summary": null
+    },
+    {
+      "name": "Check Server / Geo-IP",
+      "category": "Sports API",
+      "passed": true,
+      "duration_ms": 2174.38,
+      "details": "IP: 152.59.145.254, Region: Bihar, ISP: Reliance Jio Infocomm Limited",
+      "data_summary": null
+    },
+    {
+      "name": "Sports Navigation Tree",
+      "category": "Sports API",
+      "passed": true,
+      "duration_ms": 405.01,
+      "details": "Categories: t1=37, t2=2",
+      "data_summary": null
+    },
+    {
+      "name": "Get Live & Upcoming Matches",
+      "category": "Sports API",
+      "passed": true,
+      "duration_ms": 229.18,
+      "details": "Total matches found: 21, Sample: South Africa v Bangladesh (ID: 609763268)",
+      "data_summary": null
+    },
+    {
+      "name": "Game Details (ID: 838843313)",
+      "category": "Sports API",
+      "passed": true,
+      "duration_ms": 211.83,
+      "details": "Status: 200, Msg: Success",
+      "data_summary": null
+    },
+    {
+      "name": "Game Odds & Orderbook (ID: 838843313)",
+      "category": "Sports API",
+      "passed": true,
+      "duration_ms": 256.65,
+      "details": "Found 14 active markets: MATCH_ODDS, Bookmaker, Bookmaker 2, Tied Match",
+      "data_summary": null
+    },
+    {
+      "name": "Score Bootstrap (ID: 609763268)",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 444.72,
+      "details": "Match: SOUTH AFRICA vs BANGLADESH, Status: STUMPS, Provider ID: provider-3:6fb54c7a-839e-4866-9ba4-26a4771677b4",
+      "data_summary": null
+    },
+    {
+      "name": "Full Scorecard",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 228.58,
+      "details": "Innings count: 2",
+      "data_summary": null
+    },
+    {
+      "name": "Ball-by-Ball Overs Commentary",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 219.62,
+      "details": "Overs returned: 10, Latest: Over 33",
+      "data_summary": null
+    },
+    {
+      "name": "Play-by-Play Text Commentary",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 244.46,
+      "details": "Commentary entries returned: 10",
+      "data_summary": null
+    },
+    {
+      "name": "Playing XI & Bench Lineup",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 215.27,
+      "details": "Teams present: 2",
+      "data_summary": null
+    },
+    {
+      "name": "Batting Partnerships",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 236.57,
+      "details": "Innings partnerships data: 2",
+      "data_summary": null
+    },
+    {
+      "name": "Worm / Run-Rate Charts",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 217.34,
+      "details": "Chart series present for 2 innings",
+      "data_summary": null
+    },
+    {
+      "name": "Embed Widget URL Generator",
+      "category": "Score API",
+      "passed": true,
+      "duration_ms": 0.01,
+      "details": "Embed URL: https://dzfytm4o128av.cloudfront.net/embed/609763268?theme=dark",
+      "data_summary": null
+    },
+    {
+      "name": "Bet Payload Builder & Profit Validation",
+      "category": "Betting API",
+      "passed": true,
+      "duration_ms": 0.02,
+      "details": "Calculated Stake: 500.0, Rate: 1.5, Profit: 250.0",
+      "data_summary": null
+    },
+    {
+      "name": "Auth Protection & 401 Decryption",
+      "category": "Betting API",
+      "passed": true,
+      "duration_ms": 362.22,
+      "details": "Gracefully intercepted 401: 'Please Login'",
+      "data_summary": null
+    }
+  ]
+}
