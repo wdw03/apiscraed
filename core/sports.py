@@ -2,6 +2,7 @@
 D247 Sports & Live Odds Client Module
 """
 
+import os
 from typing import Any, Dict, List, Optional, Union
 import requests
 from .crypto import encrypt_cryptojs, decrypt_cryptojs, DEFAULT_CRYPTO_KEY
@@ -20,20 +21,44 @@ class SportsClient:
         self.key = key
         self.timeout = timeout
         self.session = requests.Session()
+        
+        # Real Chrome browser header fingerprint to satisfy WAF checks
         self.session.headers.update({
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Sec-Ch-Ua-Platform": '"Windows"',
+            "Sec-Ch-Ua": '"Not-A.Brand";v="99", "Google Chrome";v="120", "Chromium";v="120"',
+            "Sec-Ch-Ua-Mobile": "?0",
             "Content-Type": "application/json",
             "Accept": "application/json, text/plain, */*",
             "Origin": "https://d247.com",
-            "Referer": "https://d247.com/home"
+            "Sec-Fetch-Site": "same-origin",
+            "Sec-Fetch-Mode": "cors",
+            "Sec-Fetch-Dest": "empty",
+            "Referer": "https://d247.com/home",
+            "Accept-Language": "en-IN,en-GB;q=0.9,en-US;q=0.8,en;q=0.7"
         })
+
+        # Support optional proxy for datacenter environments (e.g. AWS/Vercel)
+        proxy = os.environ.get("D247_PROXY") or os.environ.get("HTTPS_PROXY")
+        if proxy:
+            self.session.proxies.update({"http": proxy, "https": proxy})
 
     def _post_encrypted(self, path: str, payload: Any) -> Dict[str, Any]:
         """Encrypts payload with CryptoJS AES, sends POST, and decrypts the response"""
         url = f"{self.BASE_URL}{path}"
         enc_data = encrypt_cryptojs(payload, self.key)
-        resp = self.session.post(url, json={"data": enc_data}, timeout=self.timeout)
-        resp.raise_for_status()
+        
+        try:
+            resp = self.session.post(url, json={"data": enc_data}, timeout=self.timeout)
+            resp.raise_for_status()
+        except requests.exceptions.HTTPError as e:
+            if resp.status_code == 403:
+                raise RuntimeError(
+                    "D247 Cloudflare Geo-Restriction: Upstream blocked the request. "
+                    "D247 requires requests to originate from an Indian IP. "
+                    "Set Vercel region to 'bom1' (Mumbai) or configure 'D247_PROXY' in Vercel environment variables."
+                ) from e
+            raise e
         
         json_resp = resp.json()
         if "data" in json_resp:
